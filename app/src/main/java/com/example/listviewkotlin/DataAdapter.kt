@@ -1,6 +1,7 @@
 package com.example.listviewkotlin
 
 import android.app.Activity
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -25,10 +26,19 @@ class DataAdapter(activity:Activity,val resourceId:Int,data:List<DataList>) :Arr
             viewHolder=view.tag as ViewHolder
         }
         val data=getItem(position)
+        val titleTxt= data?.dContent
         if (data!=null){
             viewHolder.dImage.setImageResource(data.dImageId)
             viewHolder.dTitle.setText(data.dTitle)
             viewHolder.dContent.setText(data.dContent)
+            when(titleTxt){
+                "fail"->viewHolder.dTitle.setTextColor(Color.RED)
+                "pass"->viewHolder.dTitle.setTextColor(Color.GREEN)
+                else -> viewHolder.dTitle.setTextColor(Color.BLUE)
+            }
+//            if (titleTxt.equals("fail"))    viewHolder.dTitle.setTextColor(Color.RED)
+//            else if (titleTxt.equals("pass"))    viewHolder.dTitle.setTextColor(Color.GREEN)
+//             else  viewHolder.dTitle.setTextColor(Color.BLUE)
         }
         return view
     }//end getView
